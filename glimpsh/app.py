@@ -5,6 +5,7 @@ import shutil
 import socket
 import subprocess
 import sys
+import threading
 import time
 from pathlib import Path
 from urllib.parse import urlparse
@@ -12,25 +13,58 @@ from urllib.parse import urlparse
 from . import __version__
 from .config import load_config, save_default_config, get_config_path
 
+SPINNER_FRAMES = "⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏"
 
-def wait_for_websocket(url: str, timeout: float = 120.0, poll_interval: float = 0.5) -> bool:
+
+def wait_for_websocket(
+    url: str,
+    timeout: float = 120.0,
+    poll_interval: float = 0.5,
+    label: str | None = None,
+) -> bool:
     """
     Wait for a WebSocket server to be ready by polling the TCP port.
 
+    Shows an animated spinner with *label* while waiting.
     Returns True if server is ready, False if timeout expired.
     """
     parsed = urlparse(url)
     host = parsed.hostname or "127.0.0.1"
     port = parsed.port or 8001
 
-    start = time.time()
-    while time.time() - start < timeout:
-        try:
-            with socket.create_connection((host, port), timeout=1):
-                return True
-        except (socket.error, socket.timeout):
-            time.sleep(poll_interval)
-    return False
+    done = threading.Event()
+    result: list[bool] = [False]
+
+    def _poll() -> None:
+        start = time.time()
+        while time.time() - start < timeout:
+            try:
+                with socket.create_connection((host, port), timeout=1):
+                    result[0] = True
+                    done.set()
+                    return
+            except (socket.error, socket.timeout):
+                time.sleep(poll_interval)
+        done.set()
+
+    thread = threading.Thread(target=_poll, daemon=True)
+    thread.start()
+
+    if label and sys.stdout.isatty():
+        idx = 0
+        while not done.is_set():
+            frame = SPINNER_FRAMES[idx % len(SPINNER_FRAMES)]
+            sys.stdout.write(f"\r{frame} {label}")
+            sys.stdout.flush()
+            idx += 1
+            done.wait(0.08)
+        sys.stdout.write("\r\033[2K")
+        sys.stdout.flush()
+    else:
+        done.wait(timeout)
+
+    thread.join()
+    return result[0]
 
 
 def main(args=None) -> int:
@@ -205,7 +239,12 @@ def main(args=None) -> int:
                     stderr=subprocess.DEVNULL,
                 )
                 # Wait for the WebSocket server to be ready (after calibration/tuning)
-                if not wait_for_websocket(provider.url, timeout=120.0):
+                spinner_label = (
+                    f"Starting {provider.name} — loading models & camera..."
+                )
+                if not wait_for_websocket(
+                    provider.url, timeout=120.0, label=spinner_label
+                ):
                     print(f"Timeout waiting for {provider.name} to start")
                     if gaze_process.poll() is None:
                         gaze_process.terminate()
