@@ -1,0 +1,77 @@
+# glimpsh
+
+A glimpse into a potential future where you navigate multiple terminals with your eyes.
+
+This is a fun experimental project exploring eye-tracked terminal focus. Look at a pane to focus it. Combine with speech-to-text for hands-free coding.
+
+## Quick Start
+
+```bash
+git clone https://github.com/dchrty/glimpsh
+cd glimpsh
+pip install uv
+uv sync --extra glimpsh-eyetrax
+uv run glimpsh
+```
+
+Or for hands-free AI coding with Claude Code and voice (requires a speech-to-text tool that copies transcriptions to the clipboard — see Voice Input below):
+
+```bash
+uv run glimpsh --claude --dangerously-skip-permissions --voice
+```
+
+## Calibration
+
+On first run, follow the on-screen calibration (look at dots until they disappear).
+
+To recalibrate or fine-tune the eye tracking model:
+
+```bash
+uv run glimpsh --recalibrate
+```
+
+## Gaze Backends
+
+We've started with [eyetrax](https://github.com/dchrty/glimpsh-eyetrax) for webcam-based gaze tracking. Adapting other gaze servers is relatively easy - just implement the websocket protocol.
+
+## No Webcam?
+
+```bash
+uv run glimpsh --gaze test
+```
+
+Use `Ctrl+Arrow` keys to simulate eye movement.
+
+## Voice Input
+
+For hands-free coding, combine eye tracking with a dictation tool that copies transcribed text to the clipboard. Run with `--voice` to auto-type clipboard changes into the focused pane:
+
+```bash
+uv run glimpsh --voice
+```
+
+Look at a pane to focus it, then speak. Your dictation tool copies to clipboard, glimpsh types it in.
+
+## Claude Code
+
+Run [Claude Code](https://github.com/anthropics/claude-code) in each pane:
+
+```bash
+uv run glimpsh --claude
+```
+
+For fully autonomous operation (Claude can run commands without confirmation):
+
+```bash
+uv run glimpsh --claude --dangerously-skip-permissions
+```
+
+Combine with voice for hands-free AI coding - look at a pane, speak your request:
+
+```bash
+uv run glimpsh --claude --dangerously-skip-permissions --voice
+```
+
+## License
+
+MIT

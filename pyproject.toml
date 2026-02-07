@@ -1,0 +1,80 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "glimpsh"
+version = "0.0.1"
+description = "Gaze-controlled terminal grid. Look at a pane to focus it."
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "GlimpSh Contributors"}
+]
+requires-python = ">=3.10,<3.13"  # glimpsh-eyetrax requires MediaPipe which doesn't support 3.13+
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: MacOS",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Terminals :: Terminal Emulators/X Terminals",
+    "Topic :: Adaptive Technologies",
+]
+keywords = ["terminal", "gaze", "eye-tracking", "accessibility", "tui", "shell"]
+dependencies = [
+    "websockets>=11.0",
+    "pyyaml>=6.0",
+    "textual>=0.50.0",
+    "pyte>=0.8.0",
+]
+
+[project.optional-dependencies]
+glimpsh-eyetrax = [
+    "glimpsh-eyetrax",
+]
+dev = [
+    "pytest>=7.0",
+    "pytest-asyncio>=0.21",
+    "mypy>=1.0",
+    "ruff>=0.1",
+]
+
+[tool.uv.sources]
+glimpsh-eyetrax = { git = "https://github.com/dchrty/glimpsh-eyetrax" }
+
+[project.scripts]
+glimpsh = "glimpsh.app:main"
+
+[project.urls]
+Homepage = "https://github.com/dchrty/glimpsh"
+Documentation = "https://github.com/dchrty/glimpsh#readme"
+Repository = "https://github.com/dchrty/glimpsh.git"
+Issues = "https://github.com/dchrty/glimpsh/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["glimpsh*"]
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "C4"]
+ignore = ["E501"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]

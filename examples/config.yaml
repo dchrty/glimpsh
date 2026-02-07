@@ -1,0 +1,24 @@
+# GlimpSh Configuration Example
+# Copy to ~/.config/glimpsh/config.yaml
+
+# Command to run in each pane (defaults to your $SHELL)
+# command: zsh
+
+# To run Claude Code in every pane:
+#   command: "claude --dangerously-skip-permissions"
+# Or from the CLI:
+#   glimpsh claude --dangerously-skip-permissions
+
+grid:
+  rows: 2
+  cols: 2
+
+gaze:
+  # How long to look at a pane before it focuses (milliseconds)
+  dwell_time_ms: 200
+
+  # Gaze tracking providers (first one is used by default)
+  providers:
+    eyetrax:
+      url: "ws://127.0.0.1:8001/"
+      command: "eyetrax --filter kalman"  # launched automatically if not running
