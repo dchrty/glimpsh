@@ -11,15 +11,8 @@ git clone https://github.com/dchrty/glimpsh
 cd glimpsh
 pip install uv
 uv sync --extra glimpsh-eyetrax
-uv run glimpsh
+uv run glimpsh --claude
 ```
-
-Or for hands-free AI coding with Claude Code and voice (requires a speech-to-text tool that copies transcriptions to the clipboard — see Voice Input below):
-
-```bash
-uv run glimpsh --claude --dangerously-skip-permissions --voice
-```
-https://github.com/user-attachments/assets/a607d91b-e3e1-47a5-8757-e12e04e02570
 
 ## Calibration
 
@@ -30,6 +23,13 @@ To recalibrate or fine-tune the eye tracking model:
 ```bash
 uv run glimpsh --recalibrate
 ```
+
+Or for hands-free AI coding with Claude Code and voice (requires a speech-to-text tool that copies transcriptions to the clipboard — see Voice Input below):
+
+```bash
+uv run glimpsh --claude --dangerously-skip-permissions --voice
+```
+https://github.com/user-attachments/assets/a607d91b-e3e1-47a5-8757-e12e04e02570
 
 ## Gaze Backends
 
@@ -71,6 +71,14 @@ Combine with voice for hands-free AI coding - look at a pane, speak your request
 
 ```bash
 uv run glimpsh --claude --dangerously-skip-permissions --voice
+```
+
+## Codex
+
+Run [Codex CLI](https://github.com/openai/codex) in each pane:
+
+```bash
+uv run glimpsh --codex
 ```
 
 ## License

@@ -97,6 +97,13 @@ def main(args=None) -> int:
         help="Run Claude Code in each pane",
     )
 
+    # Codex mode
+    parser.add_argument(
+        "--codex",
+        action="store_true",
+        help="Run Codex CLI in each pane",
+    )
+
     # Clipboard auto-paste for voice input (Wispr etc.)
     parser.add_argument(
         "--voice",
@@ -138,6 +145,8 @@ def main(args=None) -> int:
     # Apply config with CLI overrides (needed early for grid mode)
     if args.claude:
         command = "claude --dangerously-skip-permissions"
+    elif args.codex:
+        command = "codex"
     elif extra:
         command = " ".join(extra)
     else:
