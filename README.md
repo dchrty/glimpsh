@@ -4,6 +4,16 @@ A glimpse into a potential future where you navigate multiple terminals with you
 
 This is a fun experimental project exploring eye-tracked terminal focus. Look at a pane to focus it. Combine with speech-to-text for hands-free coding.
 
+## Vision
+
+Glimpsh is a prototype exploring what becomes possible when lightweight gaze tracking is cheap and ubiquitous. Today's webcam-based eye tracking is imperfect, but it's improving fast.
+
+Gaze won't replace the mouse - it's a complementary input that adds a new dimension to human-computer interaction. Where it shines is **managing many things at scale**. When you're orchestrating multiple AI agents across multiple terminals, clicking to switch focus becomes a bottleneck. Your eyes are already looking where you want to act - why not use that?
+
+Pair gaze with real-time voice transcription and the interaction model shifts: look at an agent, speak a command. As brain interfaces mature, the same patterns will translate directly.
+
+This project exists to explore that future now.
+
 ## Quick Start
 
 ```bash
