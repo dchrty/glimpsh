@@ -98,11 +98,14 @@ uv run glimpsh --codex
 If this project is useful for your research, please cite it:
 
 ```bibtex
-@software{glimpsh,
-  title = {glimpsh: Gaze-controlled terminal grid},
-  author = {Jordan Docherty},
-  year = {2025},
-  url = {https://github.com/dchrty/glimpsh}
+@software{Docherty2025_glimpsh,
+  author       = {Jordan Docherty},
+  title        = {glimpsh},
+  version      = {0.0.1},
+  date         = {2025-02-07},
+  url          = {https://github.com/dchrty/glimpsh},
+  repository   = {https://github.com/dchrty/glimpsh},
+  keywords     = {gaze tracking, terminal, eye tracking, accessibility, human-computer interaction}
 }
 ```
 
