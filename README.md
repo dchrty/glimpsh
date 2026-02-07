@@ -100,7 +100,7 @@ If this project is useful for your research, please cite it:
 ```bibtex
 @software{glimpsh,
   title = {glimpsh: Gaze-controlled terminal grid},
-  author = {dchrty},
+  author = {Jordan Docherty},
   year = {2025},
   url = {https://github.com/dchrty/glimpsh}
 }
