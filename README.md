@@ -24,6 +24,10 @@ uv sync --extra glimpsh-eyetrax
 uv run glimpsh --claude  # or --codex for OpenAI Codex
 ```
 
+
+https://github.com/user-attachments/assets/69edcf18-f6ba-49cd-90da-f260030fdc81
+
+
 ## Calibration
 
 On first run, follow the on-screen calibration (look at dots until they disappear).
