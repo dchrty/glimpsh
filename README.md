@@ -19,6 +19,7 @@ Or for hands-free AI coding with Claude Code and voice (requires a speech-to-tex
 ```bash
 uv run glimpsh --claude --dangerously-skip-permissions --voice
 ```
+https://github.com/user-attachments/assets/a607d91b-e3e1-47a5-8757-e12e04e02570
 
 ## Calibration
 
