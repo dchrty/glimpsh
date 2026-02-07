@@ -84,6 +84,8 @@ class TerminalWidget(Widget):
 
             # Initialize terminal emulator
             self._screen = pyte.Screen(80, 24)
+            master_fd = self._master_fd
+            self._screen.write_process_input = lambda data: os.write(master_fd, data.encode())
             self._stream = pyte.Stream(self._screen)
 
             # Start reading from the PTY
