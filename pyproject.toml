@@ -46,7 +46,7 @@ dev = [
 ]
 
 [tool.uv.sources]
-glimpsh-eyetrax = { git = "https://github.com/dchrty/glimpsh-eyetrax" }
+glimpsh-eyetrax = { git = "https://github.com/dchrty/glimpsh-eyetrax", tag = "v0.0.1" }
 
 [project.scripts]
 glimpsh = "glimpsh.app:main"
