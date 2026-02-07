@@ -1,6 +1,8 @@
 """Main application for GlimpSh."""
 
+import os
 import platform
+import signal
 import shutil
 import socket
 import subprocess
@@ -271,12 +273,17 @@ def main(args=None) -> int:
             voice=args.voice,
         )
     finally:
-        # Clean up gaze provider subprocess
-        if gaze_process is not None:
-            gaze_process.terminate()
+        # Clean up gaze provider subprocess.
+        # Send SIGINT first so Python can handle KeyboardInterrupt and
+        # shut down camera threads cleanly.  If that doesn't work, use
+        # SIGKILL (instant death) rather than SIGTERM — SIGTERM triggers
+        # partial interpreter teardown that races with OpenCV's camera
+        # thread, causing a SIGSEGV in objc_msgSend.
+        if gaze_process is not None and gaze_process.poll() is None:
             try:
+                os.kill(gaze_process.pid, signal.SIGINT)
                 gaze_process.wait(timeout=2)
-            except subprocess.TimeoutExpired:
+            except (subprocess.TimeoutExpired, OSError):
                 gaze_process.kill()
 
 
