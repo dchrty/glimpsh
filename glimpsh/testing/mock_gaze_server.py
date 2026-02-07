@@ -122,7 +122,11 @@ class MockGazeServer:
         """Run the WebSocket server (in background thread)."""
         self._loop = asyncio.new_event_loop()
         asyncio.set_event_loop(self._loop)
-        self._loop.run_until_complete(self._serve())
+        try:
+            self._loop.run_until_complete(self._serve())
+        finally:
+            self._loop.close()
+            self._loop = None
 
     async def _serve(self) -> None:
         """Start serving and broadcasting."""
