@@ -8,7 +8,7 @@ This is a fun experimental project exploring eye-tracked terminal focus. Look at
 
 Glimpsh is a prototype exploring what becomes possible when lightweight gaze tracking is cheap and ubiquitous. Today's webcam-based eye tracking is imperfect, but it's improving fast.
 
-Gaze won't replace the mouse - it's a complementary input that adds a new dimension to human-computer interaction. Where it shines is **managing many things at scale**. When you're orchestrating multiple AI agents across multiple terminals, clicking to switch focus becomes a bottleneck. Your eyes are already looking where you want to act - why not use that?
+Gaze won't replace the mouse - it's a complementary input that adds a new dimension to human-computer interaction. Where it shines is **managing many things at scale**. Some power users are fast with keybinds, but gaze adds an intuitive HCI primitive to terminals: your eyes are already looking where you want to act.
 
 Pair gaze with real-time voice transcription and the interaction model shifts: look at an agent, speak a command. As brain interfaces mature, the same patterns will translate directly.
 
@@ -43,7 +43,7 @@ https://github.com/user-attachments/assets/a607d91b-e3e1-47a5-8757-e12e04e02570
 
 ## Gaze Backends
 
-We've started with [eyetrax](https://github.com/dchrty/glimpsh-eyetrax) for webcam-based gaze tracking. Adapting other gaze servers is relatively easy - just implement the websocket protocol.
+We've started with [glimpsh-eyetrax](https://github.com/dchrty/glimpsh-eyetrax), based on [Chenkai Zhang's EyeTrax](https://github.com/ck-zhang/EyeTrax), for webcam-based gaze tracking. Adapting other gaze servers is relatively easy - just implement the websocket protocol.
 
 ## No Webcam?
 
@@ -55,7 +55,9 @@ Use `Ctrl+Arrow` keys to simulate eye movement.
 
 ## Voice Input
 
-For hands-free coding, combine eye tracking with a dictation tool that copies transcribed text to the clipboard. Run with `--voice` to auto-type clipboard changes into the focused pane:
+Requires a transcription tool that copies text to the clipboard.
+
+Run with `--voice` to auto-type clipboard changes into the focused pane:
 
 ```bash
 uv run glimpsh --voice
@@ -89,6 +91,19 @@ Run [Codex CLI](https://github.com/openai/codex) in each pane:
 
 ```bash
 uv run glimpsh --codex
+```
+
+## Citation
+
+If this project is useful for your research, please cite it:
+
+```bibtex
+@software{glimpsh,
+  title = {glimpsh: Gaze-controlled terminal grid},
+  author = {dchrty},
+  year = {2025},
+  url = {https://github.com/dchrty/glimpsh}
+}
 ```
 
 ## License
