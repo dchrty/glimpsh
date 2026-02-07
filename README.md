@@ -11,7 +11,7 @@ git clone https://github.com/dchrty/glimpsh
 cd glimpsh
 pip install uv
 uv sync --extra glimpsh-eyetrax
-uv run glimpsh --claude
+uv run glimpsh --claude  # or --codex for OpenAI Codex
 ```
 
 ## Calibration
