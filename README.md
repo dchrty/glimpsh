@@ -38,7 +38,7 @@ To recalibrate or fine-tune the eye tracking model:
 uv run glimpsh --recalibrate
 ```
 
-Or for hands-free AI coding with Claude Code and voice (requires a speech-to-text tool that copies transcriptions to the clipboard — see Voice Input below):
+Or for hands-free AI coding with Claude Code and voice (requires a speech-to-text tool that copies transcriptions to the clipboard — see [Voice Input](#voice-input)):
 
 ```bash
 uv run glimpsh --claude --dangerously-skip-permissions --voice
@@ -58,15 +58,15 @@ Use `Ctrl+Arrow` keys to simulate eye movement.
 
 ## Voice Input
 
-Requires a transcription tool that copies text to the clipboard.
-
-Run with `--voice` to auto-type clipboard changes into the focused pane:
+The `--voice` flag monitors the clipboard for changes and auto-types them into the focused pane. It's designed to work with any speech-to-text tool that puts transcribed text on the clipboard — all glimpsh cares about is the clipboard changing.
 
 ```bash
 uv run glimpsh --voice
 ```
 
 Look at a pane to focus it, then speak. Your dictation tool copies to clipboard, glimpsh types it in.
+
+Tools like [Wispr](https://wispr.chat), [Talon](https://talonvoice.com), [Nerd Dictation](https://github.com/ideasman42/nerd-dictation), or open-weight models such as [Whisper](https://github.com/openai/whisper) / [whisper.cpp](https://github.com/ggerganov/whisper.cpp) and [Vosk](https://alphacephei.com/vosk/) could all serve as the transcription source. Some of these copy to the clipboard out of the box; others may need a minimal wrapper script to pipe their output there.
 
 ## Claude Code
 
